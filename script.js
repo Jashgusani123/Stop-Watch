@@ -1,42 +1,47 @@
-let timer = false;
-let ms = 0;
-let s =0;
-let hr = 0;
-let  m = 0;
-function start() {
-    timer = true;
-    t();
-}
-function stop() {
-    timer = false;
-    t();
-}
-function reset() {
+let time = document.getElementById("timer");
+let startbtn = document.getElementById("start");
+let stopbtn = document.getElementById("stop");
+let resetbtn = document.getElementById("reset");
+
+let currntime = 0;
+let startingtime = 0;
+let timerInterval;
+
+function startTimer() {
+    startingtime = Date.now() - currntime;
+    timerInterval = setInterval(calling, 10);
 
 }
-function t() {
-    if (timer == true) {
-        ms = ms + 1;
-        if (ms == 100) {
-            s = s + 1;
-            ms = 0;
-        }
-        if (s == 60) {
-            m = m + 1;
-            s = 0;
-        }
-        if (m == 60) {
-            hr = hr + 1;
-            m = 0;
-
-        }
-        
-        
-        setTimeout("t()", 0);
-        document.getElementById("ms").innerText = ms;
-        document.getElementById("s").innerText = s<10 ? "0"+s:s;
-        document.getElementById("m").innerText = m<10 ? "0"+m:m;
-        document.getElementById("h").innerText = hr<10 ? "0"+hr:hr;
-
-    }
+function calling() {
+    currntime = Date.now() - startingtime;
+    time.textContent = timefun(currntime);
 }
+
+
+function timefun(currntime) {
+    const milliseconds = Math.floor((currntime % 1000) / 10);
+    const seconds = Math.floor((currntime % (1000 * 60)) / 1000);
+    const minutes = Math.floor((currntime % (1000 * 60 * 60)) / (1000 * 60));
+    const hours = Math.floor(currntime / (1000 * 60 * 60));
+    return (
+        (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+        ":" +
+        (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+        ":" +
+        (seconds ? (seconds > 9 ? seconds : "0" + seconds) : "00") +
+        "." +
+        (milliseconds > 9 ? milliseconds : "0" + milliseconds)
+    );
+}
+
+function stopfun(){
+    clearInterval(timerInterval);
+}
+function resetfun(){
+    clearInterval(timerInterval);
+    currntime = 0;
+    time.textContent = "00:00:00";
+}
+startbtn.addEventListener("click", startTimer);
+stopbtn.addEventListener("click" , stopfun);
+resetbtn.addEventListener("click",resetfun);
