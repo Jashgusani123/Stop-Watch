@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stop Watch</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="contenar">
-        <div id="watch">
-            <p id="h">00</p>
-            <p>:</p>
-            <p id="m">00</p>
-            <p>:</p>
-            <p id="s">00</p>
-            <p>:</p>
-            <p id="ms">00</p>
-        </div>
-        <div class="button">
-            <button onclick="start()">Start</button>
-            <button onclick="stop()">Stop</button>
-            <button onclick="reset()">Reset</button>
+    <div class="main">
+        <div id="timer">00:00:00</div>
+        <div id="buttons">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
